@@ -1,0 +1,110 @@
+{
+  "name": "jagdrevier",
+  "version": "0.0.2",
+  "description": "A large collection of learning!",
+  "keywords": [
+    "jagdrevier",
+    "algorithms",
+    "data-structures",
+    "design-patterns",
+    "learn"
+  ],
+  "author": "littleLane <lzz857183384@163.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:littleLane/jagdrevier.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "eslint --ext .ts src/ --ext .ts test/",
+    "lint:fix": "eslint --fix --ext .ts src/ --ext .ts test/",
+    "prebuild": "rimraf dist",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "lint-staged",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/**/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,ts}"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
+    "@types/sinon": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "colors": "^1.4.0",
+    "commitizen": "^4.0.3",
+    "coveralls": "^3.0.11",
+    "cz-conventional-changelog": "^3.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "jest": "^25.2.7",
+    "jest-config": "^25.2.7",
+    "lint-staged": "^10.1.2",
+    "prettier": "^2.0.3",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^5.0.2",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^17.0.4",
+    "shelljs": "^0.8.3",
+    "sinon": "^9.0.1",
+    "travis-deploy-once": "^5.0.11",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
+    "typedoc": "^0.17.4",
+    "typescript": "^3.8.3"
+  }
+}
