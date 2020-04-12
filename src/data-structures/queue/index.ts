@@ -13,15 +13,15 @@ export default class Queue<T> {
     return this
   }
 
-  peek() {
+  peek(): T | undefined {
     return this.queue.shift()
   }
 
-  size() {
+  size(): number {
     return this.queue.length
   }
 
-  getAll() {
+  getAll(): T[] {
     return this.queue
   }
 
