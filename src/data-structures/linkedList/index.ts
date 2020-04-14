@@ -67,4 +67,28 @@ export default class LinkedList<T> {
       currentNode.next!.next = null
     }
   }
+
+  // reverse() {
+  //   if (this.head.next) {
+  //     const currentNode = this.head.next
+  //     let q = null
+  //     let pr = null
+
+  //     while (currentNode) {
+  //       let p = currentNode.next
+  //       this.head.next = null
+
+  //       while (p) {
+  //         pr = p.next
+  //         p.next = q
+  //         q = p
+  //         p = pr
+  //       }
+  //     }
+
+  //     this.head.next = q
+  //   }
+
+  //   return this.head
+  // }
 }
