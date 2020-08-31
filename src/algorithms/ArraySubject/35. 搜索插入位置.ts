@@ -42,3 +42,33 @@ function searchInsert1(nums: number[], target: number): number {
 
   return len
 }
+
+/**
+ * 二分查找
+ * @param nums
+ * @param target
+ */
+function searchInsert2(nums: number[], target: number): number {
+  const len = nums.length
+
+  if (len === 0) return 0
+  if (nums[len - 1] < target) return len
+
+  let low = 0
+  let high = nums.length - 1
+
+  // 注意： 这里是 low <= high，而不是原始的 low < high，要多走一步！
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2)
+
+    if (nums[mid] < target) {
+      low = mid + 1
+    } else if (nums[mid] > target) {
+      high = mid - 1
+    } else {
+      return mid
+    }
+  }
+
+  return low
+}
