@@ -74,3 +74,21 @@ function isValidBST1(root: TreeNode | null): boolean {
 
   return true
 }
+
+/***************************2、递归验证************************ */
+// 1、节点的左子树只包含小于当前节点的数。
+// 2、节点的右子树只包含大于当前节点的数。
+// 3、所有左子树和右子树自身必须也是二叉搜索树。
+function helper(root: TreeNode | null, lower: number, upper: number): boolean {
+  if (root === null) return true
+
+  if (root.val <= lower || root.val >= upper) {
+    return false
+  }
+
+  return helper(root.left, lower, root.val) && helper(root.right, root.val, upper)
+}
+
+function isValidBST2(root: TreeNode | null): boolean {
+  return helper(root, -Infinity, Infinity)
+}
