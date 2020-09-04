@@ -35,7 +35,7 @@
 /**
  * 先中序遍历获取所有节点值数组，然后针对数组做操作
  */
-class BSTIterator {
+class BSTIterator1 {
   private result: number[]
 
   constructor(root: TreeNode | null) {
@@ -57,5 +57,37 @@ class BSTIterator {
 
   hasNext(): boolean {
     return !!this.result.length
+  }
+}
+
+/**
+ * 通过 stack 模拟中序遍历
+ */
+class BSTIterator2 {
+  private resultStack: TreeNode[] = []
+
+  constructor(root: TreeNode | null) {
+    this.pushNodeLeft(root)
+  }
+
+  pushNodeLeft(node: TreeNode | null) {
+    while (node) {
+      this.resultStack.push(node)
+      node = node.left
+    }
+  }
+
+  next(): number {
+    const node = this.resultStack.pop()
+
+    if (node?.right) {
+      this.resultStack.push(node.right)
+    }
+
+    return node?.val as number
+  }
+
+  hasNext(): boolean {
+    return !!this.resultStack.length
   }
 }
