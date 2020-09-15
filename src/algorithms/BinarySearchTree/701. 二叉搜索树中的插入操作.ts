@@ -42,6 +42,8 @@
  *     }
  * }
  */
+
+// 递归 1
 function insertIntoBST1(root: TreeNode | null, val: number): TreeNode | null {
   if (!root) {
     root = new TreeNode(val)
@@ -68,6 +70,7 @@ function helperInsert(root: TreeNode, val: number) {
   }
 }
 
+// 递归 2
 function insertIntoBST2(root: TreeNode | null, val: number): TreeNode | null {
   if (!root) {
     return new TreeNode(val)
@@ -82,6 +85,7 @@ function insertIntoBST2(root: TreeNode | null, val: number): TreeNode | null {
   return root
 }
 
+// 迭代
 function insertIntoBST3(root: TreeNode | null, val: number): TreeNode | null {
   const newNode = new TreeNode(val)
   let cur = root
