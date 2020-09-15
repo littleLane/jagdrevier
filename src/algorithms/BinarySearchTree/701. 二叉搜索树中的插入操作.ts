@@ -81,3 +81,28 @@ function insertIntoBST2(root: TreeNode | null, val: number): TreeNode | null {
 
   return root
 }
+
+function insertIntoBST3(root: TreeNode | null, val: number): TreeNode | null {
+  const newNode = new TreeNode(val)
+  let cur = root
+
+  while (cur) {
+    if (cur.val < val) {
+      if (!cur.right) {
+        cur.right = newNode
+        return root
+      } else {
+        cur = cur.right
+      }
+    } else {
+      if (!cur.left) {
+        cur.left = newNode
+        return root
+      } else {
+        cur = cur.left
+      }
+    }
+  }
+
+  return newNode
+}
