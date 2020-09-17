@@ -26,3 +26,43 @@ function containsNearbyAlmostDuplicate1(nums: number[], k: number, t: number): b
 
   return false
 }
+
+function isNil(value: any) {
+  return value === null || value === undefined
+}
+
+// 滑动窗口、查找表、桶排序
+function containsNearbyAlmostDuplicate2(nums: number[], k: number, t: number): boolean {
+  if (k < 0 || t < 0) return false
+
+  const getKey = (value: number) => Math.floor(value / (t + 1))
+
+  const resultMap: { [key: string]: number | null } = {}
+
+  let i = 0
+
+  while (i < nums.length) {
+    const currentNum = nums[i]
+    const key = getKey(currentNum)
+
+    if (!isNil(resultMap[key])) return true
+
+    const upKey = resultMap[key + 1]
+    if (!isNil(upKey) && upKey! - currentNum <= t) return true
+
+    const downKey = resultMap[key - 1]
+    if (!isNil(downKey) && currentNum - downKey! <= t) return true
+
+    resultMap[key] = currentNum
+
+    if (i >= k) {
+      resultMap[getKey(nums[i - k])] = null
+    }
+
+    i++
+  }
+
+  return false
+}
+
+console.log(containsNearbyAlmostDuplicate2([1, 5, 9, 1, 5, 9], 2, 3))
