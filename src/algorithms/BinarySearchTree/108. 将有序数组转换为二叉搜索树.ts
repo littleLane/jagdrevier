@@ -40,3 +40,17 @@ function sortedArrayToBST1(nums: number[], start: number = 0, end: number = nums
 
   return new TreeNode(nums[mid], sortedArrayToBST1(nums, start, mid - 1), sortedArrayToBST1(nums, mid + 1, end))
 }
+
+/**
+ * 中序遍历  选中间靠右边的元素作为根节点
+ * @param nums
+ * @param start
+ * @param end
+ */
+function sortedArrayToBST2(nums: number[], start: number = 0, end: number = nums.length - 1): TreeNode | null {
+  if (!nums.length || start > end) return null
+
+  const mid = Math.ceil((start + end) / 2)
+
+  return new TreeNode(nums[mid], sortedArrayToBST2(nums, start, mid - 1), sortedArrayToBST2(nums, mid + 1, end))
+}
