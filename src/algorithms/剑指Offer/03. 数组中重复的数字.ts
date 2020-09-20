@@ -9,13 +9,13 @@
 // 限制：2 <= n <= 100000
 
 /**
- * lastIndexOf
+ * lastIndexOf   time => o(n)  space => o(1)
  * @param nums
  */
 function findRepeatNumber1(nums: number[]): number {
   for (let i = 0, l = nums.length; i < l; i++) {
     const num = nums[i]
-    const lastIndex = nums.lastIndexOf(num)
+    const lastIndex = nums.lastIndexOf(nums[i])
 
     if (lastIndex !== i) {
       return num
@@ -26,7 +26,7 @@ function findRepeatNumber1(nums: number[]): number {
 }
 
 /**
- * 先排序，然后比较前后两值是否相等
+ * 先排序，然后比较前后两值是否相等   time => o(nlogn)  space => o(n)
  * @param nums
  */
 function findRepeatNumber2(nums: number[]): number {
@@ -42,7 +42,7 @@ function findRepeatNumber2(nums: number[]): number {
 }
 
 /**
- * 缓存法，也就是题解里面说到的 hash 表法
+ * 缓存法，也就是题解里面说到的 hash 表法   time => o(n)  space => o(n)
  * @param nums
  */
 function findRepeatNumber3(nums: number[]): number {
@@ -58,6 +58,30 @@ function findRepeatNumber3(nums: number[]): number {
     if (i < l - 1) {
       numSet.add(num)
     }
+  }
+
+  return -1
+}
+
+/**
+ * 原地置换   time => o(n)  space => o(1)
+ * @param nums
+ */
+function findRepeatNumber4(nums: number[]): number {
+  for (let i = 0, l = nums.length; i < l; i++) {
+    const num = nums[i]
+
+    if (num === i) {
+      continue
+    }
+
+    if (num === nums[num]) {
+      return num
+    }
+
+    ;[nums[i], nums[num]] = [nums[num], nums[i]]
+
+    i--
   }
 
   return -1
