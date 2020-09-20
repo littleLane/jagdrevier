@@ -52,7 +52,7 @@ function isBalanced2(root: TreeNode | null): boolean {
   const height = (root: TreeNode | null): number => {
     if (!root) return 0
 
-    return Math.max(height(root.left), height(root.right))
+    return Math.max(height(root.left), height(root.right)) + 1
   }
 
   return Math.abs(height(root.left) - height(root.right)) <= 1 && isBalanced2(root.left) && isBalanced2(root.right)
