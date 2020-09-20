@@ -24,3 +24,19 @@ function findRepeatNumber1(nums: number[]): number {
 
   return -1
 }
+
+/**
+ * 先排序，然后比较前后两值是否相等
+ * @param nums
+ */
+function findRepeatNumber2(nums: number[]): number {
+  nums = nums.sort((a, b) => a - b)
+
+  for (let i = 1, l = nums.length; i < l; i++) {
+    if (nums[i] === nums[i - 1]) {
+      return nums[i]
+    }
+  }
+
+  return -1
+}
