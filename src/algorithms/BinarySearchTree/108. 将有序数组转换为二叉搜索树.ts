@@ -54,3 +54,18 @@ function sortedArrayToBST2(nums: number[], start: number = 0, end: number = nums
 
   return new TreeNode(nums[mid], sortedArrayToBST2(nums, start, mid - 1), sortedArrayToBST2(nums, mid + 1, end))
 }
+
+/**
+ * 中序遍历，选择任意一个中间位置数字作为根节点
+ * @param nums
+ * @param start
+ * @param end
+ */
+function sortedArrayToBST3(nums: number[], start: number = 0, end: number = nums.length - 1): TreeNode | null {
+  if (!nums.length || start > end) return null
+
+  const rand = Math.random()
+  const mid = rand > 0.5 ? Math.ceil((start + end) / 2) : Math.floor((start + end) / 2)
+
+  return new TreeNode(nums[mid], sortedArrayToBST3(nums, start, mid - 1), sortedArrayToBST3(nums, mid + 1, end))
+}
