@@ -40,3 +40,25 @@ function findRepeatNumber2(nums: number[]): number {
 
   return -1
 }
+
+/**
+ * 缓存法，也就是题解里面说到的 hash 表法
+ * @param nums
+ */
+function findRepeatNumber3(nums: number[]): number {
+  const numSet = new Set()
+
+  for (let i = 0, l = nums.length; i < l; i++) {
+    const num = nums[i]
+
+    if (numSet.has(num)) {
+      return num
+    }
+
+    if (i < l - 1) {
+      numSet.add(num)
+    }
+  }
+
+  return -1
+}
