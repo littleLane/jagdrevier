@@ -47,3 +47,34 @@ function findNumberIn2DArray1(matrix: number[][], target: number): boolean {
 
   return false
 }
+
+/**
+ * 每一行都按照从左到右递增的顺序排序
+ * 每一列都按照从上到下递增的顺序排序
+ * 特性：以左下角，即 [col.length - 1][0] 为起点，向上递减，向右递增
+ * @param matrix
+ * @param target
+ */
+function findNumberIn2DArray2(matrix: number[][], target: number): boolean {
+  if (!matrix || !matrix.length) {
+    return false
+  }
+
+  const rlen = matrix.length
+  const clen = matrix[0].length
+
+  let curR = rlen - 1
+  let curC = 0
+
+  while (curR >= 0 && curC < clen) {
+    if (matrix[curR][curC] > target) {
+      curR--
+    } else if (matrix[curR][curC] < target) {
+      curC++
+    } else {
+      return true
+    }
+  }
+
+  return false
+}
