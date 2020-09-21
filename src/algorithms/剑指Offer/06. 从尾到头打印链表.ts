@@ -43,3 +43,20 @@ function reversePrint1(head: ListNode | null): number[] {
 
   return result.reverse()
 }
+
+/**
+ * 顺序遍历链表，将每个节点值通过 unshift 从头压入结果数组
+ * @param head
+ */
+function reversePrint2(head: ListNode | null): number[] {
+  const result = []
+
+  let cur: ListNode | null = head
+
+  while (cur) {
+    result.unshift(cur.val)
+    cur = cur.next
+  }
+
+  return result.reverse()
+}
