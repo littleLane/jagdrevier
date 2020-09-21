@@ -13,3 +13,23 @@
 function replaceSpace1(s: string): string {
   return s.replace(/\s/g, '%20')
 }
+
+/**
+ * 暴力
+ * @param s
+ */
+function replaceSpace2(s: string): string {
+  let result: string = ''
+
+  for (let i = 0, l = s.length; i < l; i++) {
+    const char = s[i]
+
+    if (char === ' ') {
+      result += '%20'
+    } else {
+      result += char
+    }
+  }
+
+  return result
+}
