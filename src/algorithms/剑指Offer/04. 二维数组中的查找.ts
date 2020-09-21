@@ -25,7 +25,7 @@
  * @param target
  */
 function findNumberIn2DArray1(matrix: number[][], target: number): boolean {
-  if (!matrix || !matrix.length) {
+  if (!matrix || !matrix.length || !matrix[0].length) {
     return false
   }
 
@@ -56,7 +56,7 @@ function findNumberIn2DArray1(matrix: number[][], target: number): boolean {
  * @param target
  */
 function findNumberIn2DArray2(matrix: number[][], target: number): boolean {
-  if (!matrix || !matrix.length) {
+  if (!matrix || !matrix.length || !matrix[0].length) {
     return false
   }
 
@@ -73,6 +73,27 @@ function findNumberIn2DArray2(matrix: number[][], target: number): boolean {
       curC++
     } else {
       return true
+    }
+  }
+
+  return false
+}
+
+/**
+ * 暴力求解
+ * @param matrix
+ * @param target
+ */
+function findNumberIn2DArray3(matrix: number[][], target: number): boolean {
+  if (!matrix || !matrix.length || !matrix[0].length) {
+    return false
+  }
+
+  for (let i = 0, il = matrix.length; i < il; i++) {
+    for (let j = 0, jl = matrix[i].length; j < jl; j++) {
+      if (matrix[i][j] === target) {
+        return true
+      }
     }
   }
 
