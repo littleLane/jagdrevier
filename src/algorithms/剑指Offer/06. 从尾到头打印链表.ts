@@ -60,3 +60,11 @@ function reversePrint2(head: ListNode | null): number[] {
 
   return result.reverse()
 }
+
+/**
+ * 递归
+ * @param head
+ */
+function reversePrint3(head: ListNode | null): number[] {
+  return head ? reversePrint3(head.next).concat(head.val) : []
+}
