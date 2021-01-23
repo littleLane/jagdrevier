@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shadowDOM</title>
+  </head>
+  <body>
+    <style>
+      p {
+        color: yellow;
+      }
+    </style>
+    <p>lane</p>
+    <div id="hostElement"></div>
+    <script>
+      const shadowDOM = document.querySelector('#hostElement').attachShadow({
+        mode: 'open',
+      })
+
+      const pElement = document.createElement('p')
+      pElement.innerHTML = 'Hello World'
+
+      const styleElement = document.createElement('style')
+      styleElement.textContent = `
+      p { color: red }
+    `
+
+      shadowDOM.appendChild(pElement)
+      shadowDOM.appendChild(styleElement)
+    </script>
+  </body>
+</html>
