@@ -1,0 +1,10 @@
+{
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": false,
+  "editor.formatOnSave": true,
+  "html.format.enable": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "liveServer.settings.port": 5501,
+  "editor.fontSize": 14
+}
