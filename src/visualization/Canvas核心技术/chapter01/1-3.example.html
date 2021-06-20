@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas element size: 600 x 300, Canvas drawing surface size: 300 x 150</title>
+    <style>
+      body {
+        background: #ddd;
+      }
+      #canvas {
+        margin: 10px;
+        padding: 10px;
+        background: #fff;
+        border: thin inset #aaa;
+        width: 600px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 只设置 CSS 属性，未显式设置 width 和 height 则会出现绘制内容放大或缩小的效果，导致绘制内容模糊 -->
+    <canvas id="canvas">
+      <!-- 设置的 CSS 属性和显式设置的 width 和 height 一致，绘制内容正常展示 -->
+      <!-- <canvas id="canvas" width="600" height="300"> -->
+      Canvas not supported
+    </canvas>
+    <script>
+      var canvas = document.getElementById('canvas')
+      var context = canvas.getContext('2d')
+
+      context.font = '38pt Arial'
+      context.fillStyle = 'cornflowerblue'
+      context.strokeStyle = 'blue'
+      context.fillText('Hello Canvas', canvas.width / 2 - 150, canvas.height / 2 + 15)
+      canvas.strokeText('Hello Canvas', canvas.width / 2 - 150, canvas.height / 2 + 15)
+    </script>
+  </body>
+</html>

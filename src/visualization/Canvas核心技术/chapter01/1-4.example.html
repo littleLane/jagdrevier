@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock</title>
+    <style>
+      body {
+        background: #ddd;
+      }
+      #canvas {
+        margin: 10px;
+        padding: 10px;
+        background: #fff;
+        border: thin inset #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400">
+      Canvas not supported
+    </canvas>
+    <script>
+      var canvas = document.getElementById('canvas')
+      var context = canvas.getContext('2d')
+      var FONT_HEIGHT = 15
+      var MARGIN = 35
+      var HAND_TRUNCATION = canvas.width / 25
+      var HOUR_HAND_TRUNCATION = canvas.width / 10
+      var NUMERAL_SPACING = 20
+      var RADIUS = canvas.width / 2 - MARGIN
+      var HAND_RADIUS = RADIUS + NUMERAL_SPACING
+
+      // 绘制时钟圆盘
+      function drawCircle() {
+        // 开始定义路径
+        context.beginPath()
+
+        // 创建圆形路径
+        context.arc(canvas.width / 2, canvas.height / 2, RADIUS, 0, Math.PI * 2, true)
+
+        // 画出（填充）定义好的路径，此时路径方可见
+        context.stroke()
+      }
+
+      // 绘制时钟圆盘周围的数字
+      function drawNumerals() {
+        var numerals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        var angle = 0
+        var numeralWidth = 0
+
+        numerals.forEach((numeral) => {
+          angle = ((Math.PI * 2) / 12) * (numeral - 3)
+          numeralWidth = context.measureText(numeral).width
+          context.fillText(
+            numeral,
+            canvas.width / 2 + Math.cos(angle) * HAND_RADIUS - numeralWidth / 2,
+            canvas.height / 2 + Math.sin(angle) * HAND_RADIUS + FONT_HEIGHT / 3
+          )
+        })
+      }
+
+      // 绘制时钟中心的实心圆点
+      function drawCenter() {
+        context.beginPath()
+        context.arc(canvas.width / 2, canvas.height / 2, 4, 0, Math.PI * 2, true)
+        context.fill()
+      }
+
+      // 绘制单条指示线
+      function drawHand(loc, isHour) {
+        var angle = Math.PI * 2 * (loc / 60) - Math.PI * 2
+        var handRadius = isHour ? RADIUS - HAND_TRUNCATION - HOUR_HAND_TRUNCATION : RADIUS - HAND_TRUNCATION
+
+        context.moveTo(canvas.width / 2, canvas.height / 2)
+        context.lineTo(
+          canvas.width / 2 + Math.cos(angle) * handRadius,
+          canvas.height / 2 + Math.sin(angle) * handRadius
+        )
+        context.stroke()
+      }
+
+      function drawHands() {
+        var date = new Date()
+        var hour = date.getHours()
+
+        hour = hour > 12 ? hour - 12 : hour
+
+        drawHand(hour * 5 + (date.getMinutes() / 60) * 5, true, 0.5)
+        drawHand(date.getMinutes(), false, 0.5)
+        drawHand(date.getSeconds(), false, 0.2)
+      }
+
+      function drawClock() {
+        context.clearRect(0, 0, canvas.width, canvas.height)
+
+        drawCircle()
+        drawCenter()
+        drawHands()
+        drawNumerals()
+      }
+
+      context.font = FONT_HEIGHT + 'px Arial'
+
+      var loop = setInterval(drawClock, 1000)
+    </script>
+  </body>
+</html>
